@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <iostream>
 
+#define pi 3.14
+
 int main()
 {
 	//ShowWindow(GetConsoleWindow(), SW_SHOW);
@@ -13,7 +15,7 @@ int main()
 	//defination of constants
 	const int screenWidth = 800;
 	const int screenHeight = 600;
-	double ballPosition[2] = { 400, 300 };
+	double ballPosition[2] = {400, 300};
 	sf::Vector2f paddleSize(25, 100);
 
 	//create window
@@ -25,6 +27,7 @@ int main()
 	ball.setFillColor(sf::Color::White);
 	ball.setOutlineColor(sf::Color::Black);
 	ball.setOutlineThickness(3);
+	float ballAngle = 0.f;
 
 	// Create the left paddle
 	sf::RectangleShape leftPaddle;
@@ -52,8 +55,6 @@ int main()
 	sf::Event event;
 	while (window.isOpen())
 	{
-
-
 		while (window.pollEvent(event))
 		{
 			//close if x is clicked or Escape is pressed
@@ -92,14 +93,27 @@ int main()
 			rightPaddle.move(0.f, paddleSpeed * deltaTime);
 		}
 
-		ball.move( speed * deltaTime, 0);
-		if (ball.getPosition().x >= 790 || ball.getPosition().x < 0)
+		// Check the collisions between the walls
+		if (ball.getPosition().x - 10 < 0.f)
+		{
 			speed = -speed;
-
-		std::cout << rightPaddle.getPosition().x << ", " << rightPaddle.getPosition().y << std::endl;
-		std::cout << ball.getPosition().x << ", " << ball.getPosition().y << std::endl;
-		std::cout << "==============================================" << std::endl;
-
+			//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
+		}
+		if (ball.getPosition().x + 10 > screenWidth)
+		{
+			speed = -speed;
+			//pauseMessage.setString("You won!\nPress space to restart or\nescape to exit");
+		}
+		if (ball.getPosition().y - 10 < 0.f)
+		{
+			ballAngle = -ballAngle;
+			ball.setPosition(ball.getPosition().x, 10 + 0.1f);
+		}
+		if (ball.getPosition().y + 10 > screenHeight)
+		{
+			ballAngle = -ballAngle;
+			ball.setPosition(ball.getPosition().x, screenHeight - 10 - 0.1f);
+		}
 
 		// Check the collisions between the ball and the paddles
 			// Left Paddle
@@ -108,7 +122,11 @@ int main()
 			ball.getPosition().y >= leftPaddle.getPosition().y &&
 			ball.getPosition().y + 7<= leftPaddle.getPosition().y + paddleSize.y)
 		{
-			//ball.setPosition(leftPaddle.getPosition().x + + paddleSize.x + 0.1f, ball.getPosition().y);
+			if (ball.getPosition().y > leftPaddle.getPosition().y)
+				ballAngle = pi - ballAngle + (std::rand() % 20) * pi / 180;
+			else
+				ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
+
 			speed = -speed;
 		}
 
@@ -118,21 +136,25 @@ int main()
 			ball.getPosition().y >= rightPaddle.getPosition().y &&
 			ball.getPosition().y - 7 <= rightPaddle.getPosition().y + paddleSize.y)
 		{
-			/*if (ball.getPosition().y > rightPaddle.getPosition().y)
+			if (ball.getPosition().y > leftPaddle.getPosition().y)
 				ballAngle = pi - ballAngle + (std::rand() % 20) * pi / 180;
 			else
-				ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;*/
+				ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
-			/*ball.setPosition(rightPaddle.getPosition().x - ballRadius - paddleSize.x / 2 - 0.1f, ball.getPosition().y);*/
 			speed = -speed;
 		}
 
+		// Move the ball
+		float factor = speed * deltaTime;
+		ball.move(std::cos(ballAngle) * factor, std::sin(ballAngle) * factor);
 
+		//debug
+		std::cout << "Ball angle = " << ballAngle << std::endl;
+		std::cout << rightPaddle.getPosition().x << ", " << rightPaddle.getPosition().y << std::endl;
+		std::cout << ball.getPosition().x << ", " << ball.getPosition().y << std::endl;
+		std::cout << "==============================================" << std::endl;
 		if (ball.getPosition().x > max)
 			max = ball.getPosition().x;
-		
-
-		
 
 		window.clear(sf::Color(0xff, 0xbf, 0x65));
 		window.draw(ball);
