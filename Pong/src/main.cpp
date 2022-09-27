@@ -52,10 +52,27 @@ int main()
 	rightPaddle.setFillColor(sf::Color(200, 100, 100));
 	rightPaddle.setOrigin(paddleSize / 2.f);
 
+	//Set Starting Posotions
 	ball.setPosition(ballStartPosition);
 	leftPaddle.setPosition(leftPaddleStartPosition);
 	rightPaddle.setPosition(rightPaddleStartPosition);
 	double speed = 400;
+
+	// Load the text font
+	sf::Font font;
+	if (!font.loadFromFile("Inconsolata-Bold.ttf")) {
+		std::cout << "font not loaded" << std::endl;
+		return 1;
+	}
+
+	// Initialize the pause message
+	sf::Text pauseMessage;
+	pauseMessage.setFont(font);
+	pauseMessage.setCharacterSize(40);
+	pauseMessage.setPosition(170.f, 150.f);
+	pauseMessage.setFillColor(sf::Color::White);
+	pauseMessage.setString("Welcome to SFML pong!\nPress space to start the game");
+
 	sf::Clock clock;
 
 	double max = 0;
@@ -86,10 +103,6 @@ int main()
 					ball.setPosition(ballStartPosition);
 					leftPaddle.setPosition(leftPaddleStartPosition);
 					rightPaddle.setPosition(rightPaddleStartPosition);
-
-					// Reset the ball angle
-					
-					ballAngle = 0;
 				}
 			}
 		}
@@ -125,15 +138,17 @@ int main()
 			// Check the collisions between the walls
 			if (ball.getPosition().x - ballSize < 0.f)
 			{
-				//speed = -speed;
+				
 				//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
 				isPlaying = false;
+				ballAngle = 0.f;
 			}
 			if (ball.getPosition().x + ballSize > screenWidth)
 			{
-				//speed = -speed;
+				
 				//pauseMessage.setString("You won!\nPress space to restart or\nescape to exit");
 				isPlaying = false;
+				ballAngle = 3.14f;
 			}
 			if (ball.getPosition().y - ballSize < 0.f)
 			{
@@ -159,8 +174,8 @@ int main()
 					ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 				ball.setPosition(leftPaddle.getPosition().x + ballSize + paddleSize.x / 2 + 0.1f, ball.getPosition().y);
+				//Speed ramp up
 				speed += 10;
-				//speed = -speed;
 			}
 
 			// Right Paddle
@@ -175,8 +190,8 @@ int main()
 					ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 				ball.setPosition(rightPaddle.getPosition().x - ballSize - paddleSize.x / 2 - 0.1f, ball.getPosition().y);
+				//Speed ramp up
 				speed += 10;
-				//speed = -speed;
 			}
 
 			// Move the ball
