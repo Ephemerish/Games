@@ -8,8 +8,8 @@
 
 int main()
 {
-	ShowWindow(GetConsoleWindow(), SW_SHOW);
-	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+	//ShowWindow(GetConsoleWindow(), SW_SHOW);
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	//defination of constants
 	const int screenWidth = 800;
@@ -51,7 +51,7 @@ int main()
 	rightPaddle.setOutlineColor(sf::Color::Black);
 	rightPaddle.setFillColor(sf::Color(200, 100, 100));
 	rightPaddle.setOrigin(paddleSize / 2.f);
-
+	 
 	//Set Starting Posotions
 	ball.setPosition(ballStartPosition);
 	leftPaddle.setPosition(leftPaddleStartPosition);
@@ -60,7 +60,9 @@ int main()
 
 	// Load the text font
 	sf::Font font;
-	if (!font.loadFromFile("Inconsolata-Bold.ttf")) {
+	font.loadFromFile("assets/Inconsolata-Bold.ttf");
+
+	if (!font.loadFromFile("assets/Inconsolata-Bold.ttf")) {
 		std::cout << "font not loaded" << std::endl;
 		return 1;
 	}
@@ -69,9 +71,9 @@ int main()
 	sf::Text pauseMessage;
 	pauseMessage.setFont(font);
 	pauseMessage.setCharacterSize(40);
-	pauseMessage.setPosition(170.f, 150.f);
+	pauseMessage.setPosition(100.f, 150.f);
 	pauseMessage.setFillColor(sf::Color::White);
-	pauseMessage.setString("Welcome to SFML pong!\nPress space to start the game");
+	pauseMessage.setString("\t\t SFML Pong!\nPress space to start the game");
 
 	sf::Clock clock;
 
@@ -138,15 +140,14 @@ int main()
 			// Check the collisions between the walls
 			if (ball.getPosition().x - ballSize < 0.f)
 			{
-				
-				//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
+				pauseMessage.setString("Right won!\nPress space to restart or\nescape to exit"	);
 				isPlaying = false;
 				ballAngle = 0.f;
 			}
 			if (ball.getPosition().x + ballSize > screenWidth)
 			{
 				
-				//pauseMessage.setString("You won!\nPress space to restart or\nescape to exit");
+				pauseMessage.setString("Left won!\nPress space to restart or\nescape to exit");
 				isPlaying = false;
 				ballAngle = 3.14f;
 			}
@@ -214,11 +215,27 @@ int main()
 			//sf::Vector2f ballResetDistance = ball.getPosition() - 
 		}
 
-		//Window
-		window.clear(sf::Color(0xff, 0xbf, 0x65));
-		window.draw(ball);
-		window.draw(leftPaddle);
-		window.draw(rightPaddle);
+		
+		
+
+		if(!isPlaying)
+		{
+			//window
+			window.clear(sf::Color(0xff, 0xC3, 0x0F));
+			// Draw the pause message
+			window.draw(pauseMessage);
+		}
+		else if (isPlaying)
+		{
+			//Window
+			window.clear(sf::Color(0xff, 0xC3, 0x0F));
+			// Draw the paddles and the ball
+			window.draw(leftPaddle);
+			window.draw(rightPaddle);
+			window.draw(ball);
+		}
+		
+
 		window.display();
 	}
 
