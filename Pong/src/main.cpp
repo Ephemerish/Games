@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <windows.h>
+#include "Score.h"
 
 int main()
 {
@@ -76,6 +77,7 @@ int main()
 	pauseMessage.setString("\t\t SFML Pong!\nPress space to start the game");
 
 	sf::Clock clock;
+	Pong::Score score;
 
 	double max = 0;
 	sf::Event event;
@@ -140,14 +142,16 @@ int main()
 			// Check the collisions between the walls
 			if (ball.getPosition().x - ballSize < 0.f)
 			{
-				pauseMessage.setString("Right won!\nPress space to restart or\nescape to exit"	);
+				score.addPointsRight();
+				pauseMessage.setString(score.getStanding());
 				isPlaying = false;
 				ballAngle = 0.f;
 			}
 			if (ball.getPosition().x + ballSize > screenWidth)
 			{
-				
-				pauseMessage.setString("Left won!\nPress space to restart or\nescape to exit");
+				score.addPointsLeft();
+				pauseMessage.setString(score.getStanding());
+				//pauseMessage.setString("\t\tLeft won!\nPress space to restart or\n\t  escape to exit");
 				isPlaying = false;
 				ballAngle = 3.14f;
 			}

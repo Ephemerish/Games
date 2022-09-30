@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Snake", "Snake\Snake.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pong", "Pong\Pong.vcxproj", "{009E6658-425B-41AD-A089-33267D760F81}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{F2028AE9-5015-4435-BABE-D5C7CC851353}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{009E6658-425B-41AD-A089-33267D760F81}.Release|x64.Build.0 = Release|x64
 		{009E6658-425B-41AD-A089-33267D760F81}.Release|x86.ActiveCfg = Release|Win32
 		{009E6658-425B-41AD-A089-33267D760F81}.Release|x86.Build.0 = Release|Win32
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Debug|x64.ActiveCfg = Debug|x64
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Debug|x64.Build.0 = Debug|x64
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Debug|x86.ActiveCfg = Debug|Win32
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Debug|x86.Build.0 = Debug|Win32
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Release|x64.ActiveCfg = Release|x64
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Release|x64.Build.0 = Release|x64
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Release|x86.ActiveCfg = Release|Win32
+		{F2028AE9-5015-4435-BABE-D5C7CC851353}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
