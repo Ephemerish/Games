@@ -19,13 +19,13 @@ int main()
 	sf::Vector2f ballStartPosition(400, 300);
 	sf::Vector2f leftPaddleStartPosition(25, 300);
 	sf::Vector2f rightPaddleStartPosition(775, 300);
-	const float pi = 3.14159f;
+	const double pi = 3.14159f;
 
 	//create window
 	sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight, 32), "Pong",
 		sf::Style::Titlebar | sf::Style::Close);
 
-	//create ball
+//	//create ball
 	sf::RectangleShape ball(sf::Vector2f(7, 7));
 	ball.setFillColor(sf::Color::White);
 	ball.setOutlineColor(sf::Color::Black);
@@ -33,8 +33,8 @@ int main()
 	ball.setOrigin(10 / 2, 10 / 2);
 
 	// Ball Defination
-	float ballSize = 10;
-	float ballAngle = 0.f;
+	double ballSize = 10;
+	double ballAngle = 0.f;
 	
 
 	// Create the left paddle
@@ -113,8 +113,8 @@ int main()
 
 		if (isPlaying)
 		{
-			const float paddleSpeed = 400.f;
-			float deltaTime = clock.restart().asSeconds();
+			const double paddleSpeed = 400.f;
+			double deltaTime = clock.restart().asSeconds();
 			// Move the player 1's paddle
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) &&
 				(leftPaddle.getPosition().y - paddleSize.y / 2 > 5))
@@ -200,7 +200,7 @@ int main()
 			}
 
 			// Move the ball
-			float factor = speed * deltaTime;
+			double factor = speed * deltaTime;
 			ball.move(std::cos(ballAngle) * factor, std::sin(ballAngle) * factor);
 			//ball.move(std::cos(ballAngle) * factor, std::sin(ballAngle) * 0);
 
@@ -237,6 +237,7 @@ int main()
 			window.draw(leftPaddle);
 			window.draw(rightPaddle);
 			window.draw(ball);
+			window.draw(score.standing);
 		}
 		
 
