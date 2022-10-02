@@ -1,5 +1,6 @@
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 namespace Pong
 {

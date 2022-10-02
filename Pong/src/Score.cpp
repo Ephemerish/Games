@@ -7,9 +7,8 @@ namespace Pong
 			scoreFont.loadFromFile("assets/Inconsolata-Bold.ttf");
 			standing.setFont(scoreFont);
 			standing.setCharacterSize(40);
-			standing.setPosition(100.f, 150.f);
+			standing.setPosition(sf::Vector2f(100, 50));
 			standing.setFillColor(sf::Color::White);
-			standing.setString("0 : 0");
 		}
 
 		void Score::addPointsLeft()

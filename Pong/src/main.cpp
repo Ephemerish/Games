@@ -143,15 +143,16 @@ int main()
 			if (ball.getPosition().x - ballSize < 0.f)
 			{
 				score.addPointsRight();
-				pauseMessage.setString(score.getStanding());
+				score.standing.setString(score.getStanding());
+				pauseMessage.setString("\t\tRight Scored!\nPress space to continue or\n\t  escape to exit");
 				isPlaying = false;
 				ballAngle = 0.f;
 			}
 			if (ball.getPosition().x + ballSize > screenWidth)
 			{
 				score.addPointsLeft();
-				pauseMessage.setString(score.getStanding());
-				//pauseMessage.setString("\t\tLeft won!\nPress space to restart or\n\t  escape to exit");
+				score.standing.setString(score.getStanding());
+				pauseMessage.setString("\t\tLeft Scored!\nPress space to continue or\n\t  escape to exit");
 				isPlaying = false;
 				ballAngle = 3.14f;
 			}
@@ -228,6 +229,7 @@ int main()
 			window.clear(sf::Color(0xff, 0xC3, 0x0F));
 			// Draw the pause message
 			window.draw(pauseMessage);
+			window.draw(score.standing);
 		}
 		else if (isPlaying)
 		{
