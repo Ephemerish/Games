@@ -16,6 +16,7 @@ namespace Daklit
 		void Update();
 
 		bool IsDone();
+		void Done();
 		bool IsFullScreen();
 		sf::Vector2u GetWindowSize();
 

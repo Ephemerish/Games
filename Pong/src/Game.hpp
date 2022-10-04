@@ -20,13 +20,14 @@ namespace Daklit
 		sf::Time GetElapsed();
 		void RestartClock();
 	private:
-		sf::Vector2f m_ballSize;
-		double m_ballAngle;
 
 		sf::Vector2f m_paddleSize;
 		sf::Vector2f m_ballStartPosition;
 		sf::Vector2f m_leftPaddleStartPosition;
 		sf::Vector2f m_rightPaddleStartPosition;
+
+		sf::Vector2f m_ballSize;
+		double m_ballAngle;
 
 		sf::RectangleShape m_ball;
 		sf::RectangleShape m_leftPaddle;

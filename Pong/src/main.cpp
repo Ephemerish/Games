@@ -1,7 +1,10 @@
 #include "Game.hpp"
+#include <windows.h>
 
-int main(int argc, char** argv[])
+void main(int argc, char** argv[])
 {
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+
 	Daklit::Game game;
 	while (!game.GetWindow()->IsDone())
 	{
@@ -11,5 +14,4 @@ int main(int argc, char** argv[])
 		sf::sleep(sf::seconds(0.002));
 		game.RestartClock();
 	}
-	return 0;
 }

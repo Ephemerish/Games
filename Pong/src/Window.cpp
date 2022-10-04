@@ -47,6 +47,10 @@ namespace Daklit
 	{
 		return m_isDone;
 	}
+	void Window::Done()
+	{
+		m_isDone = true;
+	}
 	bool Window::IsFullScreen()
 	{
 		return m_isFullScreen;
