@@ -154,11 +154,13 @@
     <ClCompile Include="src\Score.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\Score.h" />
     <ClInclude Include="src\Window.hpp" />
+    <ClInclude Include="src\Text.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,19 +4,27 @@ namespace Daklit
 {
 //public:
 	Game::Game() : m_window("Pong", sf::Vector2u(800, 600)), m_ballSize(sf::Vector2f(10,10)),
-		m_ballAngle(0.1f), m_paddleSize(sf::Vector2f(25, 100))
+		m_ballAngle(0), m_paddleSize(sf::Vector2f(25, 100)), m_increment(400)
 	{
-		m_ball = sf::RectangleShape(m_ballSize - sf::Vector2f(3, 3));
+		Setup();
+	}
+	Game::~Game() {}
+
+	void Game::Setup()
+	{
+		ResetAngle();
+
+		m_ball.setSize(m_ballSize - sf::Vector2f(3, 3));
 		m_ball.setOutlineThickness(3);
 		m_ball.setOutlineColor(sf::Color::Red);
-		m_ball.setOrigin(m_ball.getPosition().x / 2, m_ball.getPosition().y / 2);
-		m_ball.setPosition(sf::Vector2f(400, 300));
+		m_ball.setOrigin(m_ball.getPosition().x / 2.f, m_ball.getPosition().y / 2.f);
+		m_ball.setPosition(sf::Vector2f(m_window.GetWindowSize().x/2.f, m_window.GetWindowSize().y / 2.f));
 
 		m_leftPaddle.setSize(m_paddleSize - sf::Vector2f(3, 3));
 		m_leftPaddle.setOutlineThickness(3);
 		m_leftPaddle.setOutlineColor(sf::Color::Black);
 		m_leftPaddle.setFillColor(sf::Color(100, 100, 200));
-		m_leftPaddle.setOrigin(m_paddleSize / 2.f); 
+		m_leftPaddle.setOrigin(m_paddleSize / 2.f);
 		m_leftPaddle.setPosition(sf::Vector2f(m_paddleSize.x / 2.f + 10, 300));
 
 		m_rightPaddle.setSize(m_paddleSize - sf::Vector2f(3, 3));
@@ -26,7 +34,17 @@ namespace Daklit
 		m_rightPaddle.setOrigin(m_paddleSize / 2.f);
 		m_rightPaddle.setPosition(sf::Vector2f(m_window.GetWindowSize().x - m_paddleSize.x / 2.f - 7, 300));
 	}
-	Game::~Game() {}
+
+	void Game::Reset()
+	{
+		ResetAngle();
+		m_increment = 400;
+
+		m_elapsed = m_clock.restart();
+		m_ball.setPosition(sf::Vector2f(m_window.GetWindowSize().x / 2.f, m_window.GetWindowSize().y / 2.f));
+		m_leftPaddle.setPosition(sf::Vector2f(m_paddleSize.x / 2.f + 10, 300));
+		m_rightPaddle.setPosition(sf::Vector2f(m_window.GetWindowSize().x - m_paddleSize.x / 2.f - 7, 300));
+	}
 
 	void Game::HandleInput()
 	{
@@ -54,25 +72,47 @@ namespace Daklit
 		{
 			m_rightPaddle.move(0.f, distance);
 		}
+
+		MoveBall();
 	}
 	void Game::Update()
 	{
 		m_window.Update();
-		MoveBall();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			Reset();
+		}
 	}
 	void Game::Render()
 	{
 		//clear screen
-		m_window.BeginDraw();
+		m_window.BeginDraw(sf::Color(0xff, 0xC3, 0x0F));
+		
 		m_window.Draw(m_ball);
 		m_window.Draw(m_leftPaddle);
 		m_window.Draw(m_rightPaddle);
 		// Display.
 		m_window.EndDraw(); 
 	}
+	void Game::Pause()
+	{
+		//clear screen
+		m_window.BeginDraw(sf::Color(0xff, 0xff, 0x0F));
+		// Display.
+		m_window.EndDraw();
+	}
 	Window* Game::GetWindow()
 	{ 
 		return& m_window; 
+	}
+
+	void Game::ResetAngle()
+	{
+		do
+		{
+			m_ballAngle = (std::rand() % 360) * 2 * pi / 360;
+		} while (std::abs(std::cos(m_ballAngle)) < 0.9f);
 	}
 
 	sf::Time Game::GetElapsed()
@@ -93,22 +133,24 @@ namespace Daklit
 	// left wall
 		if (m_ball.getPosition().x - m_ballSize.x < 0.f)
 		{
-			//m_window.Done();
+			m_window.notPlaying();
 
-			if (m_ball.getPosition().y > m_rightPaddle.getPosition().y)
+			//wall bounce
+			/*if (m_ball.getPosition().y > m_rightPaddle.getPosition().y)
 				m_ballAngle = pi - m_ballAngle - (std::rand() % 20) * pi / 180;
 			else
-				m_ballAngle = pi - m_ballAngle + (std::rand() % 20) * pi / 180;
+				m_ballAngle = pi - m_ballAngle + (std::rand() % 20) * pi / 180;*/
 		}
 	// right wall
 		if (m_ball.getPosition().x + m_ballSize.x > m_window.GetWindowSize().x)
 		{
-			//m_window.Done();
+			m_window.notPlaying();
 
-			if (m_ball.getPosition().y > m_leftPaddle.getPosition().y)
+			//wall bounce
+			/*if (m_ball.getPosition().y > m_leftPaddle.getPosition().y)
 				m_ballAngle = pi - m_ballAngle - (std::rand() % 20) * pi / 180;
 			else
-				m_ballAngle = pi - m_ballAngle + (std::rand() % 20) * pi / 180;
+				m_ballAngle = pi - m_ballAngle + (std::rand() % 20) * pi / 180;*/
 
 		}
 	// ceiling
@@ -136,6 +178,7 @@ namespace Daklit
 				m_ballAngle = pi - m_ballAngle - (std::rand() % 20) * pi / 180;
 
 			m_ball.setPosition(m_leftPaddle.getPosition().x + m_ballSize.x + m_paddleSize.x / 2 + 0.1f, m_ball.getPosition().y);
+			m_increment += 10;
 		}
 	// right paddle
 		if (m_ball.getPosition().x + m_ballSize.x > m_rightPaddle.getPosition().x - m_paddleSize.x / 2 &&
@@ -149,9 +192,10 @@ namespace Daklit
 				m_ballAngle = pi - m_ballAngle - (std::rand() % 20) * pi / 180;
 
 			m_ball.setPosition(m_rightPaddle.getPosition().x - m_ballSize.x - m_paddleSize.x / 2 - 0.1f, m_ball.getPosition().y);
+			m_increment += 10;
 		}
 
-		float distance = 400 * m_elapsed.asSeconds();
+		float distance = m_increment * m_elapsed.asSeconds();
 		m_ball.move(std::cos(m_ballAngle) * distance, std::sin(m_ballAngle) * distance);
 	}
 }

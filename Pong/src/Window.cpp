@@ -4,7 +4,7 @@ namespace Daklit
 {
 	Window::Window()
 	{
-		Setup("Window", sf::Vector2u(640, 480));
+		Setup("Window", sf::Vector2u(800, 600));
 	}
 
 	Window::Window(const std::string& l_title, const sf::Vector2u& l_size)
@@ -17,9 +17,9 @@ namespace Daklit
 		void Destroy();
 	}
 
-	void Window::BeginDraw()
+	void Window::BeginDraw(sf::Color color)
 	{
-		m_window.clear(sf::Color(0xff, 0xC3, 0x0F));
+		m_window.clear(color);
 	}
 	void Window::EndDraw()
 	{
@@ -31,7 +31,8 @@ namespace Daklit
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if ((event.type == sf::Event::Closed) ||
+				((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
 			{
 				m_isDone = true;
 			}
@@ -39,8 +40,12 @@ namespace Daklit
 			{
 				ToggleFullScreen();
 			}
-		}
 
+			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space))
+			{
+				m_isPlaying = true;
+			}
+		}
 	}
 
 	bool Window::IsDone()
@@ -50,6 +55,18 @@ namespace Daklit
 	void Window::Done()
 	{
 		m_isDone = true;
+	}
+	bool Window::IsPlaying()
+	{
+		return m_isPlaying;
+	}
+	void Window::Playing()
+	{
+		m_isPlaying = true;
+	}
+	void Window::notPlaying()
+	{
+		m_isPlaying = false;
 	}
 	bool Window::IsFullScreen()
 	{
@@ -78,6 +95,7 @@ namespace Daklit
 		m_windowSize = l_size;
 		m_isFullScreen = false;
 		m_isDone = false;
+		m_isPlaying = false;
 		Create();
 	}
 

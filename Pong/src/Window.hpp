@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace Daklit
 {
@@ -10,13 +11,16 @@ namespace Daklit
 		Window(const std::string& l_title, const sf::Vector2u& l_size);
 		~Window();
 
-		void BeginDraw();
+		void BeginDraw(sf::Color color);
 		void EndDraw();
 
 		void Update();
 
 		bool IsDone();
 		void Done();
+		bool IsPlaying();
+		void Playing();
+		void notPlaying();
 		bool IsFullScreen();
 		sf::Vector2u GetWindowSize();
 
@@ -25,6 +29,7 @@ namespace Daklit
 		void Draw(sf::Drawable& l_drawable);
 	private:
 		bool m_isDone;
+		bool m_isPlaying;
 		bool m_isFullScreen;
 
 		void Setup(const std::string& l_title, const sf::Vector2u& l_size);
