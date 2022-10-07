@@ -19,15 +19,13 @@ void main(int argc, char** argv[]) {
 
 	while (window.isOpen())
 	{
-		
-
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
 		}
-		
+
 		if ((mushroom.getPosition().x + (size.x / 2) >
 			window.getSize().x && increment.x > 0) ||
 			(mushroom.getPosition().x - (size.x / 2) < 0 &&

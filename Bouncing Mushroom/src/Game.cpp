@@ -2,7 +2,7 @@
 
 namespace Daklit
 {
-//public:
+	//public:
 	Game::Game() : m_window("Bouncing Mushroom", sf::Vector2u(800, 600))
 	{
 		m_mushroomTexture.loadFromFile("assets/Mushroom.png");
@@ -13,7 +13,6 @@ namespace Daklit
 
 	void Game::HandleInput()
 	{
-
 	}
 	void Game::Update()
 	{
@@ -26,11 +25,11 @@ namespace Daklit
 		m_window.BeginDraw();
 		m_window.Draw(m_mushroom);
 		// Display.
-		m_window.EndDraw(); 
+		m_window.EndDraw();
 	}
 	Window* Game::GetWindow()
-	{ 
-		return& m_window; 
+	{
+		return&m_window;
 	}
 
 	sf::Time Game::GetElapsed()
@@ -41,7 +40,7 @@ namespace Daklit
 	{
 		m_elapsed = m_clock.restart();
 	}
-//private:
+	//private:
 	void Game::MoveMushroom()
 	{
 		sf::Vector2u l_windowSize = m_window.GetWindowSize();

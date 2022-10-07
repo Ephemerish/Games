@@ -19,4 +19,3 @@ namespace Pong
 		std::string getStanding();
 	};
 }
-

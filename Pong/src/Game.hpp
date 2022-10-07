@@ -45,5 +45,12 @@ namespace Daklit
 
 		void MoveBall();
 		Window m_window;
+		Text m_text;
+
+		sf::Font m_font;
+		sf::Text m_pauseMessage;
+	public:
+
+	private:
 	};
 }

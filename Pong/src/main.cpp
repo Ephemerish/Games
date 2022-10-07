@@ -8,9 +8,8 @@ int main(int argc, char** argv[])
 	Daklit::Game game;
 	while (!game.GetWindow()->IsDone())
 	{
-		
 		game.Update();
-		if(game.GetWindow()->IsPlaying())
+		if (game.GetWindow()->IsPlaying())
 		{
 			game.HandleInput();
 			game.Render();
