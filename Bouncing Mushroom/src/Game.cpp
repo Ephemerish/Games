@@ -52,7 +52,7 @@ namespace Daklit
 			m_increment.x = -m_increment.x;
 		}
 
-		if ((m_mushroom.getPosition().y > l_windowSize.y - l_textureSize.x && m_increment.y > 0) ||
+		if ((m_mushroom.getPosition().y > l_windowSize.y - l_textureSize.y && m_increment.y > 0) ||
 			(m_mushroom.getPosition().y < 0 && m_increment.y < 0))
 		{
 			m_increment.y = -m_increment.y;

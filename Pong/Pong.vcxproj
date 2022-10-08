@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Score.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\Text.cpp" />
   </ItemGroup>

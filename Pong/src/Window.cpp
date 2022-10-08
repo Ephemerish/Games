@@ -103,6 +103,10 @@ namespace Daklit
 	{
 		auto style = (m_isFullScreen ? sf::Style::Fullscreen : sf::Style::Default);
 		m_window.create({ m_windowSize.x, m_windowSize.y, 32 }, m_windowTitle, style);
+
+		sf::Image icon;
+		icon.loadFromFile("assets/pong.png");
+		m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	}
 	void Window::Destroy()
 	{
