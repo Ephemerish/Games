@@ -19,7 +19,7 @@ namespace Daklit
 
 	void Window::BeginDraw()
 	{
-		m_window.clear(sf::Color(0xff, 0xC3, 0x0F));
+		m_window.clear(sf::Color(0x36, 0x35, 0x37));
 	}
 	void Window::EndDraw()
 	{
@@ -50,6 +50,8 @@ namespace Daklit
 	{
 		return m_isFullScreen;
 	}
+
+	sf::RenderWindow* Window::GetRenderWindow() { return &m_window; }
 	sf::Vector2u Window::GetWindowSize()
 	{
 		return m_windowSize;
@@ -80,6 +82,10 @@ namespace Daklit
 	{
 		auto style = (m_isFullScreen ? sf::Style::Fullscreen : sf::Style::Default);
 		m_window.create({ m_windowSize.x, m_windowSize.y, 32 }, m_windowTitle, style);
+
+		sf::Image icon;
+		icon.loadFromFile("assets/snake.png");
+		m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	}
 	void Window::Destroy()
 	{

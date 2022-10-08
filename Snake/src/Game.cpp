@@ -3,65 +3,63 @@
 namespace Daklit
 {
 	//public:
-	Game::Game() : m_window("Bouncing Mushroom", sf::Vector2u(800, 600))
+	Game::Game() : m_window("Snake", sf::Vector2u(800, 600)),
+		m_snake(m_world.GetBlockSize()), m_world(sf::Vector2u(800, 600))
 	{
-		m_mushroomTexture.loadFromFile("assets/Mushroom.png");
-		m_mushroom.setTexture(m_mushroomTexture);
-		m_increment = sf::Vector2i(200, 200);
+		m_clock.restart();
+		srand(time(nullptr));
+
+		m_elapsed = 0.0f;
 	}
 	Game::~Game() {}
 
 	void Game::HandleInput()
 	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_snake.GetDirection() != Direction::Down)
+		{
+			m_snake.SetDirection(Direction::Up);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_snake.GetDirection() != Direction::Up)
+		{
+			m_snake.SetDirection(Direction::Down);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_snake.GetDirection() != Direction::Right)
+		{
+			m_snake.SetDirection(Direction::Left);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_snake.GetDirection() != Direction::Left)
+		{
+			m_snake.SetDirection(Direction::Right);
+		}
 	}
 	void Game::Update()
 	{
 		m_window.Update();
-		MoveMushroom();
+		float timestep = 1.f / m_snake.GetSpeed();
+		if (m_elapsed >= timestep)
+		{
+			m_snake.Tick();
+			m_world.Update(m_snake);
+			m_elapsed -= timestep;
+			if (m_snake.HasLost())
+			{
+				m_snake.Reset();
+			}
+		}
 	}
+
 	void Game::Render()
 	{
-		//clear screen
 		m_window.BeginDraw();
-		m_window.Draw(m_mushroom);
-		// Display.
+		// Render here.
+		m_world.Render(*m_window.GetRenderWindow());
+		m_snake.Render(*m_window.GetRenderWindow());
+
 		m_window.EndDraw();
 	}
-	Window* Game::GetWindow()
-	{
-		return&m_window;
-	}
 
-	sf::Time Game::GetElapsed()
-	{
-		return m_elapsed;
-	}
-	void Game::RestartClock()
-	{
-		m_elapsed = m_clock.restart();
-	}
+	sf::Time Game::GetElapsed() { return m_clock.getElapsedTime(); }
+	void Game::RestartClock() { m_elapsed += m_clock.restart().asSeconds(); }
+	Window* Game::GetWindow() { return &m_window; }
 	//private:
-	void Game::MoveMushroom()
-	{
-		sf::Vector2u l_windowSize = m_window.GetWindowSize();
-		sf::Vector2u l_textureSize = m_mushroomTexture.getSize();
-
-		if ((m_mushroom.getPosition().x > l_windowSize.x - l_textureSize.x && m_increment.x > 0) ||
-			(m_mushroom.getPosition().x < 0 && m_increment.x < 0))
-		{
-			m_increment.x = -m_increment.x;
-		}
-
-		if ((m_mushroom.getPosition().y > l_windowSize.y - l_textureSize.x && m_increment.y > 0) ||
-			(m_mushroom.getPosition().y < 0 && m_increment.y < 0))
-		{
-			m_increment.y = -m_increment.y;
-		}
-
-		float fElapsed = m_elapsed.asSeconds();
-		m_mushroom.setPosition(
-			m_mushroom.getPosition().x + (m_increment.x * fElapsed),
-			m_mushroom.getPosition().y + (m_increment.y * fElapsed)
-		);
-	}
 }

@@ -17,6 +17,8 @@ namespace Daklit
 
 		bool IsDone();
 		bool IsFullScreen();
+
+		sf::RenderWindow* GetRenderWindow();
 		sf::Vector2u GetWindowSize();
 
 		void ToggleFullScreen();
