@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Textbox.hpp"
 
 namespace Snake
 {
@@ -18,7 +19,7 @@ namespace Snake
 	class Snake
 	{
 	public:
-		Snake(int l_blockSize);
+		Snake(int l_blockSize, Textbox* l_textbox);
 		~Snake();
 
 		void SetDirection(Direction l_direction);
@@ -51,5 +52,7 @@ namespace Snake
 		int m_score;
 		bool m_lost;
 		sf::RectangleShape m_bodyRect;
+
+		Textbox* m_textbox;
 	};
 }

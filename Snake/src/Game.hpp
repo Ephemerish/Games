@@ -2,6 +2,7 @@
 #include "Window.hpp"
 #include "World.hpp"
 #include "Snake.hpp"
+#include "Textbox.hpp"
 
 namespace Snake
 {
@@ -26,5 +27,6 @@ namespace Snake
 		Window m_window;
 		World m_world;
 		Snake m_snake;
+		Textbox m_textbox;
 	};
 }

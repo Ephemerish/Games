@@ -3,8 +3,9 @@
 namespace Snake
 {
 	//public
-	Snake::Snake(int l_blockSize)
+	Snake::Snake(int l_blockSize, Textbox* l_textbox)
 	{
+		m_textbox = l_textbox;
 		m_size = l_blockSize;
 
 		m_bodyRect.setSize(sf::Vector2f(m_size - 1, m_size - 1));
@@ -131,6 +132,8 @@ namespace Snake
 		}
 		--m_lives;
 		if (!m_lives) { Lose(); return; }
+
+		m_textbox->Add("You have lost a life! Lives left: " + std::to_string((long long)m_lives));
 	}
 	void Snake::Render(sf::RenderWindow& l_window)
 	{

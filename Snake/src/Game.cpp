@@ -4,12 +4,15 @@ namespace Snake
 {
 	//public:
 	Game::Game() : m_window("Snake", sf::Vector2u(800, 600)),
-		m_snake(m_world.GetBlockSize()), m_world(sf::Vector2u(800, 600))
+		m_snake(m_world.GetBlockSize(), &m_textbox), m_world(sf::Vector2u(800, 600))
 	{
 		m_clock.restart();
 		srand(time(nullptr));
 
+		m_textbox.Setup(5, 14, 350, sf::Vector2f(225, 0));
 		m_elapsed = 0.0f;
+
+		m_textbox.Add("Seeded random number generator with: " + std::to_string(time(nullptr)));
 	}
 	Game::~Game() {}
 
@@ -38,11 +41,17 @@ namespace Snake
 		float timestep = 1.f / m_snake.GetSpeed();
 		if (m_elapsed >= timestep)
 		{
+			int l_lastScore = m_snake.GetScore();
 			m_snake.Tick();
 			m_world.Update(m_snake);
+			if (l_lastScore != m_snake.GetScore())
+			{
+				m_textbox.Add("You ate an apple. Score: " + std::to_string(m_snake.GetScore()));
+			}
 			m_elapsed -= timestep;
 			if (m_snake.HasLost())
 			{
+				m_textbox.Add("GAME OVER! Score: " + std::to_string(m_snake.GetScore()));
 				m_snake.Reset();
 			}
 		}
@@ -54,7 +63,7 @@ namespace Snake
 		// Render here.
 		m_world.Render(*m_window.GetRenderWindow());
 		m_snake.Render(*m_window.GetRenderWindow());
-
+		m_textbox.Render(*m_window.GetRenderWindow());
 		m_window.EndDraw();
 	}
 

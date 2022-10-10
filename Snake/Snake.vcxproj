@@ -24,12 +24,14 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\World.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Snake.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\Window.hpp" />
     <ClInclude Include="src\World.hpp" />
+    <ClInclude Include="src\Textbox.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
