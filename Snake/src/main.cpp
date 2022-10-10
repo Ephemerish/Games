@@ -3,7 +3,7 @@
 int main(int argc, char** argv[])
 {
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
-	Daklit::Game game;
+	Snake::Game game;
 	while (!game.GetWindow()->IsDone())
 	{
 		sf::sleep(sf::seconds(0.05f));

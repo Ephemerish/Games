@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-namespace Daklit
+namespace Snake
 {
 	struct SnakeSegment
 	{

@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	//public:
 	Game::Game() : m_window("Snake", sf::Vector2u(800, 600)),

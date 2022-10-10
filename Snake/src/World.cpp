@@ -1,6 +1,6 @@
 #include "World.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	//public:
 	World::World(sf::Vector2u l_windSize)

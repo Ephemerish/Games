@@ -3,7 +3,7 @@
 #include "World.hpp"
 #include "Snake.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	class Game
 	{

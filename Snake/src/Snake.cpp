@@ -1,6 +1,6 @@
 #include "Snake.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	//public
 	Snake::Snake(int l_blockSize)

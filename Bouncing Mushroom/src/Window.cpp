@@ -1,6 +1,6 @@
 #include "Window.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	Window::Window()
 	{

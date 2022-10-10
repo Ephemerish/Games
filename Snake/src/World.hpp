@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Snake.hpp"
 
-namespace Daklit
+namespace Snake
 {
 	class World
 	{
