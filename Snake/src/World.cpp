@@ -52,6 +52,10 @@ namespace Snake
 
 	void World::Update(Snake& l_player)
 	{
+		if (l_player.HasLost())
+		{
+			RespawnApple();
+		}
 		if (l_player.GetPosition() == m_item)
 		{
 			l_player.Extend();
