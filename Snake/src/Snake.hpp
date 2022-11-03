@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <deque>
+#include <vector>
 #include "Textbox.hpp"
 
 namespace Snake
@@ -37,8 +37,6 @@ namespace Snake
 		void Extend();
 		void Reset();
 
-		Direction GetPhysicalDirection();
-
 		void Move();
 		void Tick();
 		void Cut(int l_segments);
@@ -46,7 +44,7 @@ namespace Snake
 	private:
 		void CheckCollision();
 
-		std::deque<SnakeSegment> m_snakeBody;
+		std::vector<SnakeSegment> m_snakeBody;
 		int m_size;
 		Direction m_dir;
 		int m_speed;

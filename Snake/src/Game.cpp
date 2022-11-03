@@ -18,20 +18,20 @@ namespace Snake
 
 	void Game::HandleInput()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
-			&& m_snake.GetPhysicalDirection() != Direction::Down) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_snake.GetDirection() != Direction::Down)
+		{
 			m_snake.SetDirection(Direction::Up);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)
-			&& m_snake.GetPhysicalDirection() != Direction::Up) {
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_snake.GetDirection() != Direction::Up)
+		{
 			m_snake.SetDirection(Direction::Down);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
-			&& m_snake.GetPhysicalDirection() != Direction::Right) {
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_snake.GetDirection() != Direction::Right)
+		{
 			m_snake.SetDirection(Direction::Left);
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)
-			&& m_snake.GetPhysicalDirection() != Direction::Left) {
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_snake.GetDirection() != Direction::Left)
+		{
 			m_snake.SetDirection(Direction::Right);
 		}
 	}
@@ -64,7 +64,6 @@ namespace Snake
 		m_world.Render(*m_window.GetRenderWindow());
 		m_snake.Render(*m_window.GetRenderWindow());
 		m_textbox.Render(*m_window.GetRenderWindow());
-
 		m_window.EndDraw();
 	}
 

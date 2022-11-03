@@ -6,7 +6,6 @@ namespace Daklit
 	Game::Game() : m_window("Pong", sf::Vector2u(800, 600)), m_ballSize(sf::Vector2f(10, 10)),
 		m_ballAngle(0), m_paddleSize(sf::Vector2f(25, 100)), m_increment(400)
 	{
-		srand(time(nullptr));
 		Setup();
 	}
 	Game::~Game() {}
@@ -45,7 +44,6 @@ namespace Daklit
 
 	void Game::Reset()
 	{
-		srand(time(nullptr));
 		ResetAngle();
 		m_increment = 400;
 
