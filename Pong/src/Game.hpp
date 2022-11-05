@@ -49,8 +49,5 @@ namespace Daklit
 
 		sf::Font m_font;
 		sf::Text m_pauseMessage;
-	public:
-
-	private:
 	};
 }

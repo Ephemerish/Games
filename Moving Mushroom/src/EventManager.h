@@ -4,9 +4,19 @@
 #include <vector>
 #include <unordered_map>
 #include <functional>
+#include <vector>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+
+enum class EventType;
+struct EventInfo;
+struct Binding;
+struct EventDetails;
+
+using Events = std::vector<std::pair<EventType, EventInfo>>;
+using Bindings = std::unordered_map<std::string, Binding*>;
+using Callbacks = std::unordered_map<std::string, std::function<void(EventDetails*)>>;
 
 enum class EventType{
 	KeyDown = sf::Event::KeyPressed,
@@ -54,8 +64,6 @@ struct EventDetails{
 	}
 };
 
-using Events = std::vector<std::pair<EventType, EventInfo>>;
-
 struct Binding{
 	Binding(const std::string& l_name): m_name(l_name), m_details(l_name), c(0){}
 	void BindEvent(EventType l_type, EventInfo l_info = EventInfo()){
@@ -68,9 +76,6 @@ struct Binding{
 
 	EventDetails m_details;
 };
-
-using Bindings = std::unordered_map<std::string, Binding*>;
-using Callbacks = std::unordered_map<std::string, std::function<void(EventDetails*)>>;
 
 class EventManager{
 public:

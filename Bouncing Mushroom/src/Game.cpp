@@ -7,13 +7,12 @@ namespace Daklit
 	{
 		m_mushroomTexture.loadFromFile("assets/Mushroom.png");
 		m_mushroom.setTexture(m_mushroomTexture);
-		m_increment = sf::Vector2i(200, 200);
+		m_increment = sf::Vector2f(200, 200);
 	}
-	Game::~Game() {}
+	Game::~Game() = default;
 
-	void Game::HandleInput()
-	{
-	}
+	void Game::HandleInput() {}
+
 	void Game::Update()
 	{
 		m_window.Update();
@@ -58,7 +57,7 @@ namespace Daklit
 			m_increment.y = -m_increment.y;
 		}
 
-		float fElapsed = m_elapsed.asSeconds();
+		const float fElapsed = m_elapsed.asSeconds();
 		m_mushroom.setPosition(
 			m_mushroom.getPosition().x + (m_increment.x * fElapsed),
 			m_mushroom.getPosition().y + (m_increment.y * fElapsed)
