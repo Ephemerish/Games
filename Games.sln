@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bouncing Mushroom", "Bounci
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Moving Mushroom", "Moving Mushroom\Moving Mushroom.vcxproj", "{48879467-3B0E-47E3-83B3-51A29E321CA6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "A star - Path Finding", "A star - Path Finding\A star - Path Finding.vcxproj", "{48EBFA25-5687-4B63-BD9B-7760C9ED018F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{48879467-3B0E-47E3-83B3-51A29E321CA6}.Release|x64.Build.0 = Release|x64
 		{48879467-3B0E-47E3-83B3-51A29E321CA6}.Release|x86.ActiveCfg = Release|Win32
 		{48879467-3B0E-47E3-83B3-51A29E321CA6}.Release|x86.Build.0 = Release|Win32
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Debug|x64.ActiveCfg = Debug|x64
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Debug|x64.Build.0 = Debug|x64
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Debug|x86.ActiveCfg = Debug|Win32
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Debug|x86.Build.0 = Debug|Win32
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Release|x64.ActiveCfg = Release|x64
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Release|x64.Build.0 = Release|x64
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Release|x86.ActiveCfg = Release|Win32
+		{48EBFA25-5687-4B63-BD9B-7760C9ED018F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
