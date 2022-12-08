@@ -3,6 +3,7 @@
 void Game::MoveSprite(EventDetails* l_details) {
 	sf::Vector2i mousepos = m_window.GetEventManager()->GetMousePos(m_window.GetRenderWindow());
 	m_sprite.setPosition(mousepos.x, mousepos.y);
+	system("CLS");
 	std::cout << "Moving sprite to: " << mousepos.x << ":" << mousepos.y << std::endl;
 }
 

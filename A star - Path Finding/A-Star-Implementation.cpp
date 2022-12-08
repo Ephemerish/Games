@@ -1,12 +1,14 @@
 ﻿#include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 int xGridSize;
 int yGridSize;
 
-struct Node
+class Node
 {
+public:
 	int x;
 	int y;
 	bool isWall;
@@ -46,7 +48,7 @@ void Init()
 	bool isStartFound = false;
 	std::cout << "Input Dimension" << std::endl;
 	std::cin >> xGridSize >> yGridSize;
-	std::cout<< "\nInput Grid" << std::endl;
+	std::cout << "\nInput Grid" << std::endl;
 
 	for (int y = 0; y < yGridSize; y++)
 	{
@@ -59,7 +61,7 @@ void Init()
 			else if (row[x] == 'C' && !isStartFound) { Start = &Nodes[y][x]; isStartFound = true; }
 			else if (row[x] == 'C' && isStartFound) End = &Nodes[y][x];
 			else if (row[x] == '.') {}
-			else { std::cout << "Error" << std::endl << "Invalid Input" << std::endl; exit;}
+			else { std::cout << "Error" << std::endl << "Invalid Input" << std::endl; exit; }
 
 			initNode(&Nodes[y][x], x, y, isWall);
 		}
@@ -170,7 +172,9 @@ int main()
 	Init();
 	AStarAlgo();
 	ShowPath();
-
 	//Delete();
-	std::getchar();
+
+	std::cout << "\nPress any key to close this window . . .";
+	std::cin.get();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
