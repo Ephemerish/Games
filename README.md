@@ -1,11 +1,14 @@
-# Games
+# Practice Games
 
-Yo, welcome
+Welcome to my archive directory for the source code of my practice games! Please note that these games are for my own practice and learning purposes, and are not necessarily the best or most polished games out there. However, you are welcome to try and run them all if you like. All assets and dependencies are included, so you should be able to simply fork and run the games using Visual Studio.
 
-These shall be my archive directory for the source code of my practice games
+## How to Run the Games
 
-you are welcome to try and run them all. The assests and dependencies are baked with it
+1. Fork the repository to your local machine.
+2. Open the repository in Visual Studio.
+3. Build and run the project to launch the game.
 
-soo just fork and run, well as long as you are using Virtual Studio.
+## Dependencies(already included in the sln)
 
-Any how, thank you for peeking and hope you'll have a great day!
+* SFML
+* SDL
